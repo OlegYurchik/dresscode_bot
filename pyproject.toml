@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "dresscode-bot"
+version = "1.0.0"
+description = "Telegram bot to manage user rights"
+authors = ["Oleg Yurchik <oleg@yurchik.space>"]
+license = "MIT License"
+readme = "README.md"
+include = [
+  "dresscode_bot",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^3.0.0"
+pydantic = "^2.3.0"
+pydantic-settings = "^2.0.3"
+aiohttp = "^3.8.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
