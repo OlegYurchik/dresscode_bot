@@ -1,0 +1,4 @@
+database:
+  dsn: sqlite3:///db.sqlite3
+telegram:
+  token: "anysupersecret:token"

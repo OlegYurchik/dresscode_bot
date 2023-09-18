@@ -10,11 +10,23 @@ include = [
 ]
 
 [tool.poetry.dependencies]
+# main
 python = "^3.10"
 aiogram = "^3.0.0"
 pydantic = "^2.3.0"
 pydantic-settings = "^2.0.3"
 aiohttp = "^3.8.5"
+facet = "^0.9.1"
+sqlalchemy = "^2.0.20"
+alembic = "^1.12.0"
+typer = "^0.9.0"
+pyyaml = "^6.0.1"
+
+# extras
+aiosqlite = { version = "^0.19.0", optional = true }
+
+[tool.poetry.extras]
+sqlite = ["aiosqlite"]
 
 [build-system]
 requires = ["poetry-core"]

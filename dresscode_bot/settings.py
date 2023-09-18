@@ -1,28 +1,20 @@
 from pathlib import Path
-from pydantic import PositiveInt, conint
+
+import yaml
 from pydantic_settings import BaseSettings
 
-from .enums import BotMethodEnum, ChatPermissionEnum
-
-
-class WebhookSettings(BaseSettings):
-    url: str
-    secret: str | None = None
-    path: str = "/"
-    ssl_certificate: Path | None = None
-    ssl_private_key: Path | None = None
-    server_port: conint(gt=0, lt=65536) = 8443
-
-
-class PollingSettings(BaseSettings):
-    timeout: PositiveInt = 10
+from .services import database, telegram
 
 
 class Settings(BaseSettings):
-    token: str
-    method: BotMethodEnum = BotMethodEnum.POLLING
-    webhook: WebhookSettings | None = None
-    polling: PollingSettings | None = None
+    database: database.Settings
+    telegram: telegram.Settings
 
-    whitelist: list[PositiveInt]
-    permissions: list[ChatPermissionEnum] = []
+
+def get_settings(config_path: Path | None = None) -> Settings:
+    settings_parameters = {}
+    if config_path is not None:
+        with open(config_path) as config_file:
+            settings_parameters = yaml.safe_load(config_file)
+    
+    return Settings(**settings_parameters)
